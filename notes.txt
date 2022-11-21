@@ -1,0 +1,71 @@
+Feed forward, backward propagation
+- Consider logistic regression
+- basic back propagation for training of autoencoder for feature extraction
+- Autoencoders on the deep learning module
+
+Overall Idea:
+1. train network a network in such a way that the output pattern matches the input pattern
+    a. have some pattern x, we wish to learn a pattern x' such that
+    L(x,x') = ||x-x'|| = 0
+
+2. to accomplish this we need two functions in the network
+    a. first is an encoding layer which is y=f(x)
+        basically the transformation in the hidden layer
+    b. the second is then a decoding layer
+        transform the encoded pattern back to match the input pattern
+        x' = g(y)
+
+3. Task is to minimize L(x,g(f(x))
+
+Note: number of input nodes equal the number of output nodes
+
+4. for autoencoder will use a feedforward neural network with one hidden layer
+    a. the hidden layer becomes the encoding layer
+    b. output layer becomes the decoding layer
+
+Note: autoencoder provides a means to reduce the dimensionality of the data space
+providing a form for feature extraction
+
+5. for this project once we have trained the autoencoder, want to remove the
+output layer of the network and then append a traditional feedforward network to the output
+of the autoencoders hidden layer. Specifically, we take the hidden layer, and rather than connect
+it back to the output layer of the autoencoder, we tie it directly to a classification or regression layer(s).
+Then we train the entire network using backpropagation. This has the effect of “fine-tuning” the weights feeding the encoding
+layer from the autoencoder as well as learning the weights in the prediction layer(s).
+
+Note: Can choose between having a logistic activation function or hyperbolic tangent  activation function for the hidden layer.
+Output should be a softmax for classification and linear for regression.
+Choice of using momentum is optional.
+
+Classification problems should use cross-entropy loss
+Regression Problems should use mean-square error
+
+Requirements:
+1. Implement logistic regression for the three classification problems and a simple linear network for the three regression problems.
+
+2. Implement backpropagation for training feedforward neural networks. You may choose whether or not you wish to use the logistic activation function or the hyperbolic
+tangent activation function for the hidden layers. The output should be softmax for classification and linear for regression. It is your choice whether or not you use momentum.
+
+3. The classification problems should use cross-entropy loss, and the regression problems should use mean squared error.
+
+4. Train a traditional feedforward network (without using the autoencoder) with two hidden layers.
+
+5. Train an autoencoder based network where the autoencoder has one hidden layer and the prediction layer has one hidden layer. After you have built this network,
+notice that you will have yet another feedforward network with two hidden layers (one from the autoencoder and one from the prediction part).
+
+6. Run your algorithms on each of the data sets. These runs should be done with 5-fold cross-validation, so you can compare your results statistically.
+To be clear, note that you will be training three different networks on each data set:
+    1. A linear network for each of the classification and regression data sets, 
+    2. A simple feedforward network with two hidden layers (Input ⇒ Hidden 1 ⇒ Hidden 2 ⇒ Prediction) for each
+    of the classification and regression data sets
+    3. A feedforward network where the first hidden layer is trained from an autoencoder and the second hidden layer is
+    trained from the prediction part of the network (Input ⇒ Encoding ⇒ Hidden ⇒ Prediction) for each of the classification and regression data sets.
+
+# Video Demonstration
+
+– Demonstrate and explain how an example is propagated through each network. Be sure to show the activations at each layer being calculated correctly.
+– Demonstrate the weight updates for logistic regression.
+– Demonstrate the weight updates occurring on a two-layer network for each of the layers.
+– Demonstrate the weight updates occurring during the training of the autoencoder.
+– Demonstrate the autoencoding functionality (i.e., recovery of an input pattern on the output).
+– Demonstrate the gradient calculation at the output for one of your networks.
